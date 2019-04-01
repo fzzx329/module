@@ -1,38 +1,20 @@
+ <!-- vue渐变轮播图组件 -->
 <template>
-	<div id="lbt" v-bind:style="{width:width+'px',height:height+'px'}" v-on:mouseover="stop()" v-on:mouseout="autoPlay()">
-		
-			<!-- <ul class="tpk" v-bind:style="{width:W,height:height+'px',left:-width+'px'}" v-if="dj">
-				<li>
-					<a href="">
-						<img v-bind:src="tp[tp.length-1]" v-bind:style="{width:width+'px',height:height+'px'}">
-					</a>
-				</li>
-				<li v-for="(img,index) in tp" :key="index">
-					<a href="#">
-						<img v-bind:src="img" v-bind:style="{width:width+'px',height:height+'px'}">
-					</a>
-				</li>
-				<li>
-					<a href="">
-						<img v-bind:src="tp[0]" v-bind:style="{width:width+'px',height:height+'px'}">
-					</a>
-				</li>
-			</ul> -->
+	<div id="lbt" v-bind:style="{width:width+'px',height:height+'px'}" v-on:mouseover="stop()" v-on:mouseout="autoPlay()"><!-- 鼠标进出 -->
 		<transition-group name="dh">
 					<a class="tpa" href="#" v-for="(img,index) in tp" :key="index" v-show="index==cs">
 						<img v-bind:src="img" v-bind:style="{width:width+'px',height:height+'px'}">
 					</a>
-		</transition-group>
+		</transition-group><!-- 过度动画 -->
 		<ul class="xdk">
 			<li v-for="(img,index) in tp" :key="index" v-on:click="xzPlay(index)" v-bind:class="{'up':index===cs}"></li>
-		</ul>
+		</ul><!-- 小点列 -->
 		<div class="left" v-on:click="leftPlay">《</div>
 		<div class="right" v-on:click="rightPlay">》</div>		
 	</div>
 </template>
 <style type="text/css">
 	#lbt{
-		margin:0 auto;
 		position: relative;
 		overflow: hidden;
 	}/*外面大框*/
@@ -41,22 +23,11 @@
 		list-style: none;
 		overflow: hidden;
 	}/*初始化ul*/
-/*	.tpk{
-		position: absolute;
-		left: 0;
-		top: 0;
-	}
-	.tpk li{
-		float: left;
-	}
-	.tpk img{
-		vertical-align: top;
-	}*/
 	.tpa{
 		position: absolute;
 		left: 0;
 		top: 0;
-	}
+	}/*img的a外框*/
 	.tpa img{
 		vertical-align: top;
 	}
@@ -102,14 +73,14 @@
 	.right{right: 10px;}
 	.left:hover{color: #fff}
 	.right:hover{color: #fff}
-	/*---------------------------*/
+	/*-------------vue过度属性--------------*/
 	.dh-enter-active, .dh-leave-active {
 		transition: opacity 1s;
 	}
 	.dh-enter, .dh-leave-to{
 		opacity: 0;
 	}
-	/*---------------------------*/
+	/*-------------以上vue过度属性--------------*/
 </style>
 <script type="text/javascript">
 	export default{
@@ -127,39 +98,31 @@
 				play:null
 			}
 		},
-		computed:{
-			W(){
-				return (this.tp.length+2)*this.width+"px";
-			}/*获取总长度*/
-		},
 		methods:{
 			rightPlay(){
 				this.cs++;
 				if(this.cs===this.tp.length){
 					this.cs=0;
 				}
-			},
+			},/*下一张*/
 			leftPlay(){
 				if(this.cs==0){
 					this.cs=this.tp.length;
 				}
 				this.cs--;
-			},
+			},/*上一张*/
 			xzPlay(c){
 				this.cs=c;
-			},
+			},/*小点选择*/
 			autoPlay(){
 				this.play=setInterval(this.rightPlay,3000);
-			},
+			},/*自动播放定时器*/
 			stop(){
 				clearInterval(this.play);
-			},
-			plauAgain(){
-
-			}
+			}/*停止自动播放*/
 		},
 		created(){
 			this.autoPlay();
-		}
+		}/*初始化自动播放*/
 	}
 </script>
