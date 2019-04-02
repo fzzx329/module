@@ -73,14 +73,14 @@
 	.right{right: 10px;}
 	.left:hover{color: #fff}
 	.right:hover{color: #fff}
-	/*-------------vue过度属性--------------*/
+	/*-------------以下为vue过度属性--------------*/
 	.dh-enter-active, .dh-leave-active {
 		transition: opacity 1s;
 	}
 	.dh-enter, .dh-leave-to{
 		opacity: 0;
 	}
-	/*-------------以上vue过度属性--------------*/
+	/*-------------以上为vue过度属性--------------*/
 </style>
 <script type="text/javascript">
 	export default{
